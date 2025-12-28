@@ -1,6 +1,11 @@
-import { Reference } from "./crossref";
+// @ts-check
 
-export function toYAML(a: Reference) {
+/**
+ *
+ * @param {import("./crossref").Reference} a
+ * @returns {string}
+ */
+export function toYAML(a) {
   return `
 type: "article"
 title: "${a.title}"
