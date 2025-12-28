@@ -1,9 +1,7 @@
 // @ts-check
 
 /**
- *
  * @param {import("./crossref").Reference} a
- * @returns {string}
  */
 export function toYAML(a) {
   return `

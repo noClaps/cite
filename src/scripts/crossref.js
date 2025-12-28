@@ -2,27 +2,25 @@
 
 /**
  * @typedef {{
-   "short-container-title": string;
-   issue: string;
-   DOI: string;
-   created: {
-     timestamp: number;
-   };
-   page: string;
-   title: [string];
-   volume: string;
-   author: {
-     given: string;
-     family: string;
-     sequence: "first" | "additional";
-   }[];
- }} Reference
+ *   "short-container-title": string;
+ *   issue: string;
+ *   DOI: string;
+ *   created: {
+ *     timestamp: number;
+ *   };
+ *   page: string;
+ *   title: [string];
+ *   volume: string;
+ *   author: {
+ *     given: string;
+ *     family: string;
+ *     sequence: "first" | "additional";
+ *   }[];
+ * }} Reference
  */
 
 /**
- *
  * @param {string} doi
- * @returns {Promise<string | Reference>}
  */
 export async function getRef(doi) {
   try {
@@ -38,7 +36,7 @@ export async function getRef(doi) {
       .catch((err) => {
         throw err;
       })
-      .then((r) => r.message);
+      .then((r) => /** @type {Reference} */ (r.message));
   } catch (err) {
     return `This DOI didn't return any results: ${err}`;
   }
