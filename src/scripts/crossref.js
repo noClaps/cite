@@ -2,7 +2,7 @@
 
 /**
  * @typedef {{
- *   "short-container-title": string;
+ *   "container-title": [string];
  *   issue: string;
  *   DOI: string;
  *   published: {
