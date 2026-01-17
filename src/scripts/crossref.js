@@ -5,8 +5,8 @@
  *   "short-container-title": string;
  *   issue: string;
  *   DOI: string;
- *   created: {
- *     timestamp: number;
+ *   published: {
+ *     "date-parts": [[number, number, number]];
  *   };
  *   page: string;
  *   title: [string];
