@@ -6,7 +6,7 @@
  *   issue: string;
  *   DOI: string;
  *   published: {
- *     "date-parts": [[number, number, number]];
+ *     "date-parts": [[number, number?, number?]];
  *   };
  *   page: string;
  *   title: [string];
