@@ -8,15 +8,15 @@ import (
 )
 
 type Reference struct {
-	ContainerTitle []string `json:"container-title"`
-	Issue          *string  `json:"issue"`
-	Doi            string   `json:"DOI"`
+	ContainerTitle [1]string `json:"container-title"`
+	Issue          *string   `json:"issue"`
+	Doi            string    `json:"DOI"`
 	Published      struct {
-		DateParts [][]*int `json:"date-parts"`
+		DateParts [1][3]*int `json:"date-parts"`
 	} `json:"published"`
-	Page   *string  `json:"page"`
-	Title  []string `json:"title"`
-	Volume string   `json:"volume"`
+	Page   *string   `json:"page"`
+	Title  [1]string `json:"title"`
+	Volume string    `json:"volume"`
 	Author []struct {
 		Given  *string `json:"given"`
 		Family *string `json:"family"`
