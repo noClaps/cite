@@ -61,7 +61,7 @@ func (ref Reference) String() string {
   parent:
     title: "%s"
     volume: %s%s`,
-		ref.Title[0], strings.Join(authors, "  -\n"), published, pageRange, ref.Doi,
+		ref.Title[0], strings.Join(authors, "\n  "), published, pageRange, ref.Doi,
 		ref.ContainerTitle[0], ref.Volume, issue)
 
 }
