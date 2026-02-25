@@ -66,16 +66,14 @@ func (ref Reference) String() string {
 
 }
 
-type CrossRef struct {
-	Message Reference `json:"message"`
-}
-
 func getReference(doi string) (Reference, error) {
 	resp, err := http.Get("https://api.crossref.org/works/" + doi)
 	if err != nil {
 		return Reference{}, err
 	}
-	reference := new(CrossRef)
+	reference := new(struct {
+		Message Reference `json:"message"`
+	})
 	if err := json.NewDecoder(resp.Body).Decode(reference); err != nil {
 		return Reference{}, err
 	}
