@@ -25,9 +25,18 @@ Arguments:
 	url := flag.Arg(0)
 
 	doi := "10." + strings.SplitN(url, "10.", 2)[1]
-	reference, err := getReference(doi)
+	if strings.Contains(doi, "arXiv") {
+		arxiv, err := getArxiv(doi)
+		if err != nil {
+			log.Fatalln(err)
+		}
+		fmt.Println(arxiv)
+		return
+	}
+
+	crossref, err := getCrossref(doi)
 	if err != nil {
 		log.Fatalln(err)
 	}
-	fmt.Println(reference)
+	fmt.Println(crossref)
 }

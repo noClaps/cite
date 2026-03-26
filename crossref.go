@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-type Reference struct {
+type Crossref struct {
 	ContainerTitle [1]string `json:"container-title"`
 	Issue          *string   `json:"issue"`
 	Doi            string    `json:"DOI"`
@@ -23,7 +23,7 @@ type Reference struct {
 	} `json:"author"`
 }
 
-func (ref Reference) String() string {
+func (ref Crossref) String() string {
 	authors := make([]string, 0, len(ref.Author))
 	for _, author := range ref.Author {
 		if author.Given == nil || author.Family == nil {
@@ -66,16 +66,16 @@ func (ref Reference) String() string {
 
 }
 
-func getReference(doi string) (Reference, error) {
+func getCrossref(doi string) (Crossref, error) {
 	resp, err := http.Get("https://api.crossref.org/works/" + doi)
 	if err != nil {
-		return Reference{}, err
+		return Crossref{}, err
 	}
 	reference := new(struct {
-		Message Reference `json:"message"`
+		Message Crossref `json:"message"`
 	})
 	if err := json.NewDecoder(resp.Body).Decode(reference); err != nil {
-		return Reference{}, err
+		return Crossref{}, err
 	}
 
 	return reference.Message, nil
