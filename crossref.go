@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 	"strings"
 )
@@ -70,6 +71,13 @@ func getCrossref(doi string) (Crossref, error) {
 	resp, err := http.Get("https://api.crossref.org/works/" + doi)
 	if err != nil {
 		return Crossref{}, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		body, err := io.ReadAll(resp.Body)
+		if err != nil {
+			return Crossref{}, err
+		}
+		return Crossref{}, fmt.Errorf("HTTP Error %d: %s", resp.StatusCode, body)
 	}
 	reference := new(struct {
 		Message Crossref `json:"message"`

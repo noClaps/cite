@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/xml"
 	"fmt"
+	"io"
 	"net/http"
 	"strings"
 )
@@ -40,6 +41,13 @@ func getArxiv(doi string) (Arxiv, error) {
 		return Arxiv{}, err
 	}
 
+	if resp.StatusCode != http.StatusOK {
+		body, err := io.ReadAll(resp.Body)
+		if err != nil {
+			return Arxiv{}, err
+		}
+		return Arxiv{}, fmt.Errorf("HTTP Error %d: %s", resp.StatusCode, body)
+	}
 	arxiv := new(Arxiv)
 	if err := xml.NewDecoder(resp.Body).Decode(arxiv); err != nil {
 		return Arxiv{}, err
