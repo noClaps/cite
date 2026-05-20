@@ -6,7 +6,7 @@ A tool to generate [Hayagriva](https://github.com/typst/hayagriva) citations fro
 
 You can build it from source using [Rust](https://rust-lang.org):
 
-```zsh
+```sh
 cargo install --git https://github.com/noClaps/cite
 ```
 
