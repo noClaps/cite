@@ -4,10 +4,10 @@ A tool to generate [Hayagriva](https://github.com/typst/hayagriva) citations fro
 
 ## Build instructions
 
-You can build it from source using [Go](https://go.dev):
+You can build it from source using [Rust](https://rust-lang.org):
 
 ```zsh
-go install codefloe.com/noclaps/cite@latest
+cargo install --git https://github.com/noClaps/cite
 ```
 
 ## Usage
