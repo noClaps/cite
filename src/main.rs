@@ -1,20 +1,16 @@
 use std::process::exit;
 
-use clap::Parser;
+use argparse::ArgParse;
 
 use crate::doi::Doi;
 
 mod doi;
 
-#[derive(Parser)]
-struct Args {
-    /// The DOI identifier or URL to fetch data from
-    url: String,
-}
-
 fn main() -> Result<(), ureq::Error> {
-    let args = Args::parse();
-    let url = args.url;
+    let args = ArgParse::new()
+        .positional("url", "The DOI identifier or URL to fetch data from")
+        .parse();
+    let url: String = args.positional("url").unwrap();
 
     let doi = format!(
         "10.{}",
