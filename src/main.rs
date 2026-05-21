@@ -1,20 +1,23 @@
 use std::process::exit;
 
-use argparse::ArgParse;
+use clap::Parser;
 
 use crate::doi::Doi;
 
 mod doi;
 
+#[derive(Parser)]
+struct Args {
+    /// The DOI identifier or URL to fetch data from
+    url: String,
+}
+
 fn main() -> Result<(), ureq::Error> {
-    let args = ArgParse::new()
-        .positional("url", "The DOI identifier or URL to fetch data from")
-        .parse();
-    let url: String = args.positional("url").unwrap();
+    let args = Args::parse();
 
     let doi = format!(
         "10.{}",
-        match url.split_once("10.") {
+        match args.url.split_once("10.") {
             Some((_, id)) => id,
             None => {
                 eprintln!("Invalid DOI. DOI identifiers begin with `10.`");
