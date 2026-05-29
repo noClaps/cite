@@ -12,7 +12,7 @@ struct Args {
     url: String,
 }
 
-fn main() -> Result<(), ureq::Error> {
+fn main() -> Result<(), minreq::Error> {
     let args = Args::parse();
 
     let doi = format!(
@@ -26,10 +26,9 @@ fn main() -> Result<(), ureq::Error> {
         }
     );
 
-    let reference: Doi = ureq::get(format!("https://citation.doi.org/metadata?doi={}", doi))
-        .call()?
-        .body_mut()
-        .read_json()?;
+    let reference: Doi = minreq::get(format!("http://citation.doi.org/metadata?doi={}", doi))
+        .send()?
+        .json()?;
 
     println!("{}", reference);
     Ok(())
