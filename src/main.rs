@@ -2,7 +2,7 @@ use std::process::exit;
 
 use clap::Parser;
 
-use crate::doi::Doi;
+use crate::doi::Reference;
 
 mod doi;
 
@@ -17,19 +17,18 @@ fn main() -> Result<(), minreq::Error> {
 
     let doi = format!(
         "10.{}",
-        match args.url.split_once("10.") {
-            Some((_, id)) => id,
-            None => {
-                eprintln!("Invalid DOI. DOI identifiers begin with `10.`");
-                exit(1)
-            }
+        if let Some((_, id)) = args.url.split_once("10.") {
+            id
+        } else {
+            eprintln!("Invalid DOI. DOI identifiers begin with `10.`");
+            exit(1)
         }
     );
 
-    let reference: Doi = minreq::get(format!("http://citation.doi.org/metadata?doi={}", doi))
+    let reference: Reference = minreq::get(format!("http://citation.doi.org/metadata?doi={doi}"))
         .send()?
         .json()?;
 
-    println!("{}", reference);
+    println!("{reference}");
     Ok(())
 }

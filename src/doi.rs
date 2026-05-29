@@ -1,4 +1,4 @@
-use std::fmt::Display;
+use std::fmt::{Display, Write};
 
 use serde::Deserialize;
 
@@ -15,7 +15,7 @@ struct DateParts {
 }
 
 #[derive(Deserialize)]
-pub struct Doi {
+pub struct Reference {
     author: Vec<Author>,
     issued: DateParts,
     #[serde(rename(deserialize = "DOI"))]
@@ -30,7 +30,7 @@ pub struct Doi {
     published: Option<DateParts>,
 }
 
-impl Display for Doi {
+impl Display for Reference {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         writeln!(f, "  type: \"article\"")?;
         writeln!(f, "  title: \"{}\"", self.title)?;
@@ -43,9 +43,9 @@ impl Display for Doi {
         if let Some(year) = date_parts.0 {
             let mut date = format!("{year:04}");
             if let Some(month) = date_parts.1 {
-                date += &format!("-{month:02}");
+                write!(date, "-{month:02}")?;
                 if let Some(day) = date_parts.2 {
-                    date += &format!("-{day:02}");
+                    write!(date, "-{day:02}")?;
                 }
             }
             writeln!(f, "  date: \"{date}\"")?;
