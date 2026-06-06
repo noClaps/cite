@@ -1,16 +1,9 @@
 use std::process::exit;
 
-use clap::Parser;
+use crate::{args::Args, doi::Reference};
 
-use crate::doi::Reference;
-
+mod args;
 mod doi;
-
-#[derive(Parser)]
-struct Args {
-    /// The DOI identifier or URL to fetch data from
-    url: String,
-}
 
 fn main() -> Result<(), minreq::Error> {
     let args = Args::parse();
