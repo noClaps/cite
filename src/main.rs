@@ -18,7 +18,7 @@ fn main() -> Result<(), minreq::Error> {
         }
     );
 
-    let reference: Reference = minreq::get(format!("http://citation.doi.org/metadata?doi={doi}"))
+    let reference: Reference = minreq::get(format!("https://citation.doi.org/metadata?doi={doi}"))
         .send()?
         .json()?;
 
