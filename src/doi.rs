@@ -1,4 +1,4 @@
-use std::fmt::{Display, Write};
+use std::fmt::Display;
 
 use serde::Deserialize;
 
@@ -41,14 +41,14 @@ impl Display for Reference {
 
         let date_parts = self.published.unwrap_or(self.issued).date_parts.0;
         if let Some(year) = date_parts.0 {
-            let mut date = format!("{year:04}");
+            write!(f, "  date: \"{year:04}")?;
             if let Some(month) = date_parts.1 {
-                write!(date, "-{month:02}")?;
+                write!(f, "-{month:02}")?;
                 if let Some(day) = date_parts.2 {
-                    write!(date, "-{day:02}")?;
+                    write!(f, "-{day:02}")?;
                 }
             }
-            writeln!(f, "  date: \"{date}\"")?;
+            writeln!(f, "\"")?;
         }
 
         if let Some(page) = &self.page {
