@@ -30,7 +30,9 @@ This will print the Hayagriva YAML object (with 2 space indentation) for you to 
 
 ## Build instructions
 
-You can build it from source using [Rust](https://rust-lang.org):
+You can download a version for your system from [Releases](https://github.com/noClaps/cite/releases).
+
+You can also build it from source using [Rust](https://rust-lang.org):
 
 ```sh
 cargo install --git https://github.com/noClaps/cite
