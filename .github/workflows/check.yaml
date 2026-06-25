@@ -10,3 +10,4 @@ jobs:
     steps:
       - uses: actions/checkout@v6.0.2
       - run: cargo clippy --verbose
+      - run: cargo run --release -- 10.5555/12345678
