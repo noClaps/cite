@@ -1,11 +1,20 @@
 use std::process::exit;
 
-use crate::{args::Args, doi::Reference};
+use clap::Parser;
 
-mod args;
+use crate::doi::Reference;
+
 mod doi;
 
-fn main() -> Result<(), minreq::Error> {
+#[derive(Parser)]
+#[clap(version)]
+/// A tool to generate Hayagriva citations from DOI URLs
+struct Args {
+    /// The DOI identifier or URL to fetch data from
+    url: String,
+}
+
+fn main() {
     let args = Args::parse();
 
     let doi = format!(
