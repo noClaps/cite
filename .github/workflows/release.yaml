@@ -37,6 +37,7 @@ jobs:
         if: matrix.runs-on != 'windows-latest'
         with:
           files: cite-${{ matrix.target }}
+          draft: true
       - run: cp target/release/cite.exe cite-${{ matrix.target }}.exe
         if: matrix.runs-on == 'windows-latest'
         shell: bash
@@ -44,3 +45,4 @@ jobs:
         if: matrix.runs-on == 'windows-latest'
         with:
           files: cite-${{ matrix.target }}.exe
+          draft: true
